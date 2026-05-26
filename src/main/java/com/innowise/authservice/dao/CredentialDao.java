@@ -23,4 +23,8 @@ public class CredentialDao {
   public boolean existsByLogin(String login) {
     return repository.existsByLogin(login);
   }
+
+  public Credential save(Credential credential) {
+    return repository.save(credential);
+  }
 }
