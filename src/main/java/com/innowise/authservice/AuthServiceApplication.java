@@ -1,4 +1,4 @@
-package io.github.lefreshz.auth_service;
+package com.innowise.authservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

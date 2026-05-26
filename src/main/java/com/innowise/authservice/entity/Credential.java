@@ -1,6 +1,6 @@
-package io.github.lefreshz.auth_service.entity;
+package com.innowise.authservice.entity;
 
-import io.github.lefreshz.auth_service.entity.enums.Role;
+import com.innowise.authservice.entity.enums.Role;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -26,7 +26,7 @@ public class Credential {
   @Column(name = "user_id", nullable = false)
   private Long userId;
 
-  @Column(nullable = false)
+  @Column(nullable = false, unique = true)
   private String login;
 
   @Column(nullable = false)
