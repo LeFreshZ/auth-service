@@ -22,15 +22,15 @@ class AuthIntegrationTest extends IntegrationTest {
     );
 
     mvc.perform(post("/credentials")
-        .contentType(MediaType.APPLICATION_JSON)
-        .content(credentialRequest))
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(credentialRequest))
         .andExpect(status().isCreated());
 
     String loginRequest = createLoginRequest("lefreshz", "password");
 
     mvc.perform(post("/auth/login")
-        .contentType(MediaType.APPLICATION_JSON)
-        .content(loginRequest))
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(loginRequest))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.accessToken").exists())
         .andExpect(jsonPath("$.refreshToken").exists());
@@ -63,8 +63,8 @@ class AuthIntegrationTest extends IntegrationTest {
     String loginRequest = createLoginRequest("lefreshz", "password");
 
     MvcResult result = mvc.perform(post("/auth/login")
-        .contentType(MediaType.APPLICATION_JSON)
-        .content(loginRequest))
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(loginRequest))
         .andExpect(status().isOk())
         .andReturn();
 
@@ -74,8 +74,8 @@ class AuthIntegrationTest extends IntegrationTest {
     String validateRequest = createValidateRequest(response.getAccessToken());
 
     mvc.perform(post("/auth/validate")
-        .contentType(MediaType.APPLICATION_JSON)
-        .content(validateRequest))
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(validateRequest))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.valid").value(true))
         .andExpect(jsonPath("$.userId").value(1L))
@@ -110,8 +110,8 @@ class AuthIntegrationTest extends IntegrationTest {
     String refreshRequest = createRefreshRequest(response.getRefreshToken());
 
     mvc.perform(post("/auth/refresh")
-        .contentType(MediaType.APPLICATION_JSON)
-        .content(refreshRequest))
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(refreshRequest))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.accessToken").exists())
         .andExpect(jsonPath("$.refreshToken").exists());

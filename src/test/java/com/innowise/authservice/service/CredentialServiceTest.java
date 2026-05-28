@@ -24,6 +24,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @ExtendWith(MockitoExtension.class)
 class CredentialServiceTest {
+
   @Mock
   private CredentialDao dao;
 

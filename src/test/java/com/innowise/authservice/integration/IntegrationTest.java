@@ -22,6 +22,13 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 @Testcontainers
 public abstract class IntegrationTest {
 
+  @Autowired
+  protected MockMvc mvc;
+  @Autowired
+  protected ObjectMapper mapper;
+  @Autowired
+  protected JdbcTemplate jdbcTemplate;
+
   @DynamicPropertySource
   static void setProperties(DynamicPropertyRegistry registry) {
     registry.add("spring.datasource.url", TestContainersConfig.POSTGRES::getJdbcUrl);
@@ -34,15 +41,6 @@ public abstract class IntegrationTest {
     registry.add("jwt.access-token-expiration", () -> 3600000L);
     registry.add("jwt.refresh-token-expiration", () -> 86400000L);
   }
-
-  @Autowired
-  protected MockMvc mvc;
-
-  @Autowired
-  protected ObjectMapper mapper;
-
-  @Autowired
-  protected JdbcTemplate jdbcTemplate;
 
   @BeforeEach
   void clean() {

@@ -20,8 +20,8 @@ class CredentialIntegrationTest extends IntegrationTest {
     );
 
     mvc.perform(post("/credentials")
-        .contentType(MediaType.APPLICATION_JSON)
-        .content(request))
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(request))
         .andExpect(status().isCreated())
         .andExpect(jsonPath("$.login").value("lefreshz"))
         .andExpect(jsonPath("$.userId").value(1L))

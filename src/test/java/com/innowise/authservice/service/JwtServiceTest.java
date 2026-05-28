@@ -13,6 +13,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class JwtServiceTest {
+
   private JwtService service;
   private Credential credential;
 
