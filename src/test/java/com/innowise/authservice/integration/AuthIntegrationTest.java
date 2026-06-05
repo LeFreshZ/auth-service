@@ -16,7 +16,7 @@ class AuthIntegrationTest extends IntegrationTest {
   void shouldLoginAndReturnTokens() throws Exception {
     String credentialRequest = createCredentialsRequest(
         "lefreshz",
-        "password",
+        "Password1",
         1L,
         Role.ROLE_USER
     );
@@ -26,7 +26,7 @@ class AuthIntegrationTest extends IntegrationTest {
             .content(credentialRequest))
         .andExpect(status().isCreated());
 
-    String loginRequest = createLoginRequest("lefreshz", "password");
+    String loginRequest = createLoginRequest("lefreshz", "Password1");
 
     mvc.perform(post("/auth/login")
             .contentType(MediaType.APPLICATION_JSON)
@@ -38,7 +38,7 @@ class AuthIntegrationTest extends IntegrationTest {
 
   @Test
   void shouldBe401IfCredentialsInvalid() throws Exception {
-    String loginRequest = createLoginRequest("wrong", "wrong");
+    String loginRequest = createLoginRequest("wrong", "Wrongaaaa1");
 
     mvc.perform(post("/auth/login")
             .contentType(MediaType.APPLICATION_JSON)
@@ -50,7 +50,7 @@ class AuthIntegrationTest extends IntegrationTest {
   void shouldValidateToken() throws Exception {
     String credentialRequest = createCredentialsRequest(
         "lefreshz",
-        "password",
+        "Password1",
         1L,
         Role.ROLE_USER
     );
@@ -60,7 +60,7 @@ class AuthIntegrationTest extends IntegrationTest {
             .content(credentialRequest))
         .andExpect(status().isCreated());
 
-    String loginRequest = createLoginRequest("lefreshz", "password");
+    String loginRequest = createLoginRequest("lefreshz", "Password1");
 
     MvcResult result = mvc.perform(post("/auth/login")
             .contentType(MediaType.APPLICATION_JSON)
@@ -86,7 +86,7 @@ class AuthIntegrationTest extends IntegrationTest {
   void shouldRefreshTokens() throws Exception {
     String credentialRequest = createCredentialsRequest(
         "lefreshz",
-        "password",
+        "Password1",
         1L,
         Role.ROLE_USER
     );
@@ -96,7 +96,7 @@ class AuthIntegrationTest extends IntegrationTest {
             .content(credentialRequest))
         .andExpect(status().isCreated());
 
-    String loginRequest = createLoginRequest("lefreshz", "password");
+    String loginRequest = createLoginRequest("lefreshz", "Password1");
 
     MvcResult result = mvc.perform(post("/auth/login")
             .contentType(MediaType.APPLICATION_JSON)

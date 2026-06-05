@@ -14,7 +14,7 @@ class CredentialIntegrationTest extends IntegrationTest {
   void shouldSaveCredentials() throws Exception {
     String request = createCredentialsRequest(
         "lefreshz",
-        "password",
+        "Password1",
         1L,
         Role.ROLE_USER
     );
@@ -32,7 +32,7 @@ class CredentialIntegrationTest extends IntegrationTest {
   void shouldBe409IfLoginAlreadyExists() throws Exception {
     String request = createCredentialsRequest(
         "lefreshz",
-        "password",
+        "Password1",
         1L,
         Role.ROLE_USER
     );
