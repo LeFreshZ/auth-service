@@ -20,7 +20,7 @@ public class SaveCredentialsRequest {
 
   @NotBlank
   @Size(min = 8)
-  @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\\\d).*$")
+  @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\\\d).*$", message = "Password must contain at least one uppercase letter, one lowercase letter and one digit")
   private String password;
 
   @NotNull
