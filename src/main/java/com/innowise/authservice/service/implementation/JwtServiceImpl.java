@@ -18,16 +18,19 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class JwtServiceImpl implements JwtService {
 
+  public static final String TOKEN_TYPE_CLAIM = "tokenType";
+  public static final String ACCESS = "ACCESS";
+  public static final String REFRESH = "REFRESH";
   private final JwtProperties properties;
 
   @Override
   public String generateAccessToken(Credential credential) {
-    return buildToken(credential, properties.getAccessTokenExpiration(), "ACCESS");
+    return buildToken(credential, properties.getAccessTokenExpiration(), ACCESS);
   }
 
   @Override
   public String generateRefreshToken(Credential credential) {
-    return buildToken(credential, properties.getRefreshTokenExpiration(), "REFRESH");
+    return buildToken(credential, properties.getRefreshTokenExpiration(), REFRESH);
   }
 
   @Override
@@ -53,7 +56,7 @@ public class JwtServiceImpl implements JwtService {
   public boolean isRefreshToken(String token) {
     Claims claims = extractAllClaims(token);
 
-    return claims.get("tokenType", String.class).equals("REFRESH");
+    return claims.get(TOKEN_TYPE_CLAIM, String.class).equals(REFRESH);
   }
 
   private String buildToken(Credential credential, long expiration, String tokenType) {
@@ -62,7 +65,7 @@ public class JwtServiceImpl implements JwtService {
 
     return Jwts.builder()
         .subject(credential.getLogin())
-        .claim("tokenType", tokenType)
+        .claim(TOKEN_TYPE_CLAIM, tokenType)
         .claim("userId", credential.getUserId())
         .claim("role", credential.getRole().name())
         .issuedAt(now)
