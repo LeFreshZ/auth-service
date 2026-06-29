@@ -10,6 +10,7 @@ import com.innowise.authservice.service.CredentialService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @AllArgsConstructor
@@ -32,5 +33,11 @@ public class CredentialServiceImpl implements CredentialService {
     Credential savedCredential = dao.save(credential);
 
     return mapper.toResponse(savedCredential);
+  }
+
+  @Override
+  @Transactional
+  public void deleteCredentialsByUserId(Long userId) {
+    dao.deleteByUserId(userId);
   }
 }

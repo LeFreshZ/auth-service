@@ -2,6 +2,7 @@ package com.innowise.authservice.service;
 
 import com.innowise.authservice.dto.CredentialResponse;
 import com.innowise.authservice.dto.SaveCredentialsRequest;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Service interface for managing user credentials.
@@ -25,4 +26,14 @@ public interface CredentialService {
    *                                                                        exists
    */
   CredentialResponse saveCredentials(SaveCredentialsRequest request);
+
+  /**
+   * Deletes credentials associated with the given user ID.
+   *
+   * <p>Used as a compensating rollback operation during failed registration flow.
+   *
+   * @param userId the ID of the user whose credentials should be deleted
+   */
+  @Transactional
+  void deleteCredentialsByUserId(Long userId);
 }

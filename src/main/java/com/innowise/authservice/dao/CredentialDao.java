@@ -27,4 +27,8 @@ public class CredentialDao {
   public Credential save(Credential credential) {
     return repository.save(credential);
   }
+
+  public void deleteByUserId(Long userId) {
+    repository.deleteByUserId(userId);
+  }
 }
