@@ -18,9 +18,10 @@ class JwtServiceTest {
   private Credential credential;
 
   @BeforeEach
-  void setup() {
+  void setup() throws Exception {
     JwtProperties properties = new JwtProperties();
-    properties.setSecret("abcdefghijklmnopqrstuvwxyzabcdefghijklmnop");
+    properties.setPrivateKeyPath("classpath:keys/private.pem");
+    properties.setPublicKeyPath("classpath:keys/public.pem");
     properties.setAccessTokenExpiration(60000);
     properties.setRefreshTokenExpiration(120000);
 

@@ -21,10 +21,12 @@ public class SecurityConfig {
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity security) throws Exception {
     security.csrf(AbstractHttpConfigurer::disable)
-        .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+        .sessionManagement(
+            session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .authorizeHttpRequests(auth -> auth.requestMatchers("/auth/**").permitAll()
             .requestMatchers(HttpMethod.POST, "/credentials").permitAll()
             .requestMatchers(HttpMethod.DELETE, "/credentials/**").permitAll()
+            .requestMatchers("/.well-known/jwks.json").permitAll()
             .anyRequest().authenticated());
 
     return security.build();

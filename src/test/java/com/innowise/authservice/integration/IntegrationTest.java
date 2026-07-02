@@ -37,7 +37,8 @@ public abstract class IntegrationTest {
 
     registry.add("spring.jpa.hibernate.ddl-auto", () -> "validate");
 
-    registry.add("jwt.secret", () -> "abcdefghijklmnopqrstuvwxyzabcdefghijklmnop");
+    registry.add("jwt.private-key-path", () -> "classpath:keys/private.pem");
+    registry.add("jwt.public-key-path", () -> "classpath:keys/public.pem");
     registry.add("jwt.access-token-expiration", () -> 3600000L);
     registry.add("jwt.refresh-token-expiration", () -> 86400000L);
   }
