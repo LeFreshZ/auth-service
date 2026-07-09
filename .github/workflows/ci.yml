@@ -25,6 +25,11 @@ jobs:
           java-version: 21
           cache: maven
 
+      - name: Create Private Key for tests
+        run: |
+          mkdir -p src/main/resources/keys
+          echo "${{ secrets.JWT_PRIVATE_KEY }}" > src/main/resources/keys/private_key.pem
+
       - name: Build and test
         run: mvn verify
 
