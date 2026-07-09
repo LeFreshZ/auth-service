@@ -23,7 +23,8 @@ public class SecurityConfig {
     security.csrf(AbstractHttpConfigurer::disable)
         .sessionManagement(
             session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-        .authorizeHttpRequests(auth -> auth.requestMatchers("/auth/**").permitAll()
+        .authorizeHttpRequests(auth -> auth.requestMatchers("/actuator/health/**").permitAll()
+            .requestMatchers("/auth/**").permitAll()
             .requestMatchers(HttpMethod.POST, "/credentials").permitAll()
             .requestMatchers(HttpMethod.DELETE, "/credentials/**").permitAll()
             .requestMatchers("/.well-known/jwks.json").permitAll()
