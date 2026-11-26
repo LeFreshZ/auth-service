@@ -1,0 +1,42 @@
+name: CI Auth Service Pipeline
+
+on:
+  push:
+    branches:
+      - main
+      - tasks/AUTH-0
+
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-test-sonar:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+          cache: maven
+
+      - name: Create Private Key for tests
+        run: |
+          mkdir -p src/main/resources/keys
+          echo "${{ secrets.JWT_PRIVATE_KEY }}" > src/main/resources/keys/private.pem
+
+      - name: Build and test
+        run: mvn verify
+
+      - name: Run Sonar analysis
+        run: mvn sonar:sonar
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+      - name: Build Docker
+        run: docker build -t auth-service-app .
